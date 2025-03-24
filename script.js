@@ -1,20 +1,23 @@
-//your JS code here. If required.
-document.addEventListener("DOMContentLoaded",() =>
-	{
-const submitbtn=document.getElementById("submit");
-const player1input=document.getElementById("player-1");
-const player2input=document.getElementById("player-2");
-const messagediv=document.querySelector('.message');
-		const gamediv=document.getElementById('game');
-		const boardcells=document.querySelectorAll('cell');
-		let players=["player1","player2"];
-let currentplayer="x";
-let boardstate=["","","","","","","","",""];
-let gameactive=false;
+document.addEventListener("DOMContentLoaded", () => {
+    const player1Input = document.getElementById("player1");
+    const player2Input = document.getElementById("player2");
+    const submitBtn = document.getElementById("submit");
+    const message = document.querySelector(".message");
+    const gameDiv = document.getElementById("game");
+    const boardCells = document.querySelectorAll(".cell");
 
-submitbtn.addEventListener("click",() =>{
-	players=[player1input.value.trim() || "Player1",player2input.value.trim() || "Player2"];
-	 gameDiv.style.display = "block";
+    let players = ["Player 1", "Player 2"];
+    let currentPlayer = "x";
+    let gameActive = false;
+    let boardState = ["", "", "", "", "", "", "", "", ""];
+
+    submitBtn.addEventListener("click", () => {
+        players = [
+            player1Input.value.trim() || "Player 1",
+            player2Input.value.trim() || "Player 2"
+        ];
+        
+        gameDiv.style.display = "block";
         message.textContent = `${players[0]}, you're up!`;
         gameActive = true;
 
