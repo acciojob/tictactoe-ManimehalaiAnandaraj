@@ -2,7 +2,7 @@
 const submitbtn=document.getElementById("submit");
 const player1input=document.getElementById("player-1");
 const player2input=document.getElementById("player-2");
-const messagediv=document.querySelectorAll('.message');
+const messagediv=document.querySelector('.message');
 let currentplayer="x";
 let player1="";
 let player2="";
@@ -28,7 +28,7 @@ submitbtn.addEventListener("click",() =>{
 const cells = document.querySelectorAll('.cell');
 cells.forEach(cell =>{
 	cell.addEventListener("click",() =>{
-	if(!player1 || !player2 || gameactive || cell.textContent !== "")
+	if(!player1 || !player2 || !gameactive || cell.textContent !== "")
 		return;
 		const cellid=parseInt(cell.id) -1;
 		gameboard[cellid]=currentplayer;
