@@ -30,7 +30,7 @@ cells.forEach(cell =>{
 	cell.addEventListener("click",() =>{
 	if(!player1 || !player2 || gameactive || cell.textContent !== "")
 		return;
-		const cellid=parseInt(cell.id)-1;
+		const cellid=parseInt(cell.id) -1;
 		gameboard[cellid]=currentplayer;
 		cell.textContent=currentplayer;
 
