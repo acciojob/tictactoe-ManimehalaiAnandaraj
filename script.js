@@ -1,47 +1,62 @@
 //your JS code here. If required.
+document.addEventListener("DOMContentLoaded",() =>
+	{
 const submitbtn=document.getElementById("submit");
 const player1input=document.getElementById("player-1");
 const player2input=document.getElementById("player-2");
 const messagediv=document.querySelector('.message');
+		const gamediv=document.getElementById('game');
+		const boardcells=document.querySelectorAll('cell');
+		let players=["player1","player2"];
 let currentplayer="x";
-let player1="";
-let player2="";
-let gameboard=["","","","","","","","",""];
-let gameactive=true;
+let boardstate=["","","","","","","","",""];
+let gameactive=false;
 
 submitbtn.addEventListener("click",() =>{
-	player1=player1input.value;
-	player2=player2input.value;
-	if(player1 && player2)
-	{
-		messagediv.textContent=`${player1},you're up`;
-		player1input.disabled=true;
-		player2input.disabled=true;
-		submitbtn.disabled=true;
-	}
-	else
-	{
-		messagediv.textContent="Enter names:";
-	}
-});
+	players=[player1input.value.trim() || "Player1",player2input.value.trim() || "Player2"];
+	 gameDiv.style.display = "block";
+        message.textContent = `${players[0]}, you're up!`;
+        gameActive = true;
 
-const cells = document.querySelectorAll('.cell');
-cells.forEach(cell =>{
-	cell.addEventListener("click",() =>{
-	if(!player1 || !player2 || !gameactive || cell.textContent !== "")
-		return;
-		const cellid=parseInt(cell.id) -1;
-		gameboard[cellid]=currentplayer;
-		cell.textContent=currentplayer;
+        // Reset board
+        boardState.fill("");
+        boardCells.forEach(cell => {
+            cell.textContent = "";
+        });
 
-		if(checkWin())
-		{
-messagediv.textContent=`${currentplayer === "x" ? player1:player2}
-			congratulations you won!.`;
-			gameactive false;
-			return;
-		}
-		currentplayer = currentplayer === "x" ? "o" : "x";
-        messagediv.textContent = `${currentplayer === "x" ? player1 : player2}, you're up`;
-	});
+        currentPlayer = "x";  // Reset to first player
+    });
+
+    boardCells.forEach((cell, index) => {
+        cell.addEventListener("click", () => {
+            if (!gameActive || boardState[index] !== "") return;
+
+            boardState[index] = currentPlayer;
+            cell.textContent = currentPlayer;
+
+            setTimeout(() => {
+                if (checkWinner()) {
+                    message.textContent = `${currentPlayer === "x" ? players[0] : players[1]} congratulations you won!`;
+                    gameActive = false;
+                    return;
+                }
+
+                currentPlayer = currentPlayer === "x" ? "o" : "x";
+                message.textContent = `${currentPlayer === "x" ? players[0] : players[1]}, you're up!`;
+            }, 50);
+        });
+    });
+
+    function checkWinner() {
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        return winPatterns.some(pattern => {
+            const [a, b, c] = pattern;
+            return boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c];
+        });
+    }
 });
