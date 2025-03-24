@@ -2,12 +2,12 @@
 const submitbtn=document.getElementById("submit");
 const player1input=document.getElementById("player-1");
 const player2input=document.getElementById("player-2");
-const messagediv=document.querySelectorAll('.cell');
+const messagediv=document.querySelectorAll('.message');
 let currentplayer="X";
 let player1="";
 let player2="";
 let gameboard=["","","","","","","","",""];
-let gameover=false;
+let gameactive=true;
 
 submitbtn.addEventListener("click",() =>{
 	player1=player1input.value;
@@ -25,9 +25,10 @@ submitbtn.addEventListener("click",() =>{
 	}
 });
 
+const cells = document.querySelectorAll('.cell');
 cells.forEach(cell =>{
 	cell.addEventListener("click",() =>{
-	if(!player1 || !player2 || gameover || cell.textContent !== "")
+	if(!player1 || !player2 || gameactive || cell.textContent !== "")
 		return;
 		const cellid=parseInt(cell.id)-1;
 		gameboard[cellid]=currentplayer;
@@ -37,8 +38,10 @@ cells.forEach(cell =>{
 		{
 			messagediv.textContent=`${currentplayer === "X" ? player1:player2}
 			congrats you won!`;
-			gameover true;
+			gameactive false;
 			return;
 		}
-	})
-})
+		currentplayer = currentplayer === "X" ? "O" : "X";
+        messagediv.textContent = `${currentplayer === "X" ? player1 : player2}, you're up`;
+	});
+});
