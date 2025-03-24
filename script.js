@@ -3,7 +3,7 @@ const submitbtn=document.getElementById("submit");
 const player1input=document.getElementById("player-1");
 const player2input=document.getElementById("player-2");
 const messagediv=document.querySelectorAll('.message');
-let currentplayer="X";
+let currentplayer="x";
 let player1="";
 let player2="";
 let gameboard=["","","","","","","","",""];
@@ -36,12 +36,12 @@ cells.forEach(cell =>{
 
 		if(checkWin())
 		{
-			messagediv.textContent=`${currentplayer === "X" ? player1:player2}
+			messagediv.textContent=`${currentplayer === "x" ? player1:player2}
 			congrats you won!`;
 			gameactive false;
 			return;
 		}
-		currentplayer = currentplayer === "X" ? "O" : "X";
-        messagediv.textContent = `${currentplayer === "X" ? player1 : player2}, you're up`;
+		currentplayer = currentplayer === "x" ? "o" : "x";
+        messagediv.textContent = `${currentplayer === "x" ? player1 : player2}, you're up`;
 	});
 });
