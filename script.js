@@ -37,7 +37,7 @@ cells.forEach(cell =>{
 		if(checkWin())
 		{
 			messagediv.textContent=`${currentplayer === "x" ? player1:player2}
-			congrats you won!`;
+			congratulations you won!.`;
 			gameactive false;
 			return;
 		}
